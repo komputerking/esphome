@@ -3,6 +3,7 @@
 #include "esphome/core/defines.h"
 
 #ifdef USE_VOICE_ASSISTANT
+#undef USE_SPEAKER
 
 #include "esphome/core/automation.h"
 #include "esphome/core/component.h"
