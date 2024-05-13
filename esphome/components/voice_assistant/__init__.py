@@ -8,7 +8,6 @@ from esphome.const import (
     CONF_MEDIA_PLAYER,
     CONF_ON_CLIENT_CONNECTED,
     CONF_ON_CLIENT_DISCONNECTED,
-    CONF_ON_IDLE,
 )
 from esphome import automation
 from esphome.automation import register_action, register_condition
@@ -130,7 +129,6 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_ON_TTS_STREAM_END): automation.validate_automation(
                 single=True
             ),
-            cv.Optional(CONF_ON_IDLE): automation.validate_automation(single=True),
         }
     ).extend(cv.COMPONENT_SCHEMA),
     tts_stream_validate,
@@ -263,12 +261,6 @@ async def to_code(config):
             config[CONF_ON_TTS_STREAM_END],
         )
 
-    if CONF_ON_IDLE in config:
-        await automation.build_automation(
-            var.get_idle_trigger(),
-            [],
-            config[CONF_ON_IDLE],
-        )
 
     cg.add_define("USE_VOICE_ASSISTANT")
 
